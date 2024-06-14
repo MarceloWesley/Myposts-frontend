@@ -1,3 +1,4 @@
+"use client";
 import { useToastMessage } from "../toast-message";
 
 type responseValidationProps = {

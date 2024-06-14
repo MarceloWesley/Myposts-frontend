@@ -1,7 +1,8 @@
 "use client";
-import { useCallback, useContext, useEffect, useRef, useState } from "react";
+import { useCallback, useContext, useRef, useState } from "react";
 
 import AccountCircleIcon from "@mui/icons-material/AccountCircle";
+import LogoutIcon from "@mui/icons-material/Logout";
 import {
   AppBar,
   Avatar,
@@ -22,15 +23,17 @@ import {
 } from "@mui/material";
 
 import { Logo } from "./logo";
+import { getInitials } from "@/helper/getInitials";
 import { UserContext } from "@/context/session";
-import { getCookies } from "@/actions/getCookies/action";
+import { Logout } from "@/actions/logout/action";
+import { useRouter } from "next/navigation";
 
 const Header = () => {
-  const [isLogged, setIsLogger] = useState(false);
   const [openUserMenuMobile, setOpenUserMenuMobile] = useState(false);
   const [openUserMenuDesktop, setOpenUserMenuDesktop] = useState(false);
   const anchorRef = useRef<HTMLButtonElement>(null);
-  const { setIsAuthenticated } = useContext(UserContext);
+  const { loggedUser } = useContext(UserContext);
+  const router = useRouter();
 
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down("tablet"));
@@ -48,6 +51,13 @@ const Header = () => {
     setOpenUserMenuDesktop(false);
   }, []);
 
+  const handleLogout = async () => {
+    const response: any = await Logout();
+    if (response.status === 200) {
+      router.push("/login");
+    }
+  };
+
   return (
     <>
       <AppBar
@@ -61,31 +71,34 @@ const Header = () => {
         <Container maxWidth="desktop">
           <Toolbar
             sx={{
-              //   border: "solid 1px white",
-              justifyContent: isLogged ? "space-between" : "center",
+              justifyContent: "space-between",
               alignItems: "center",
             }}
           >
-            <Logo
-            //   width={isMobile ? "40px" : "60px"}
-            //   height={isMobile ? "40px" : "60px"}
-            />
+            <Logo />
 
-            {isLogged ? (
-              <IconButton
-                ref={anchorRef}
-                onClick={handleOpenMenu}
-                aria-controls={openUserMenuDesktop ? "user-menu" : undefined}
-                aria-haspopup="true"
-                aria-expanded={openUserMenuDesktop ? "true" : undefined}
+            <IconButton
+              ref={anchorRef}
+              onClick={handleOpenMenu}
+              sx={{
+                width: "50px",
+                height: "50px",
+                border: "solid 2px white",
+              }}
+              aria-controls={openUserMenuDesktop ? "user-menu" : undefined}
+              aria-haspopup="true"
+              aria-expanded={openUserMenuDesktop ? "true" : undefined}
+            >
+              <Avatar
+                sx={{
+                  fontSize: "1rem",
+                  color: "white",
+                  bgcolor: theme.palette.background.paper,
+                }}
               >
-                <Avatar sx={{ bgcolor: theme.palette.background.paper }}>
-                  MW
-                </Avatar>
-              </IconButton>
-            ) : (
-              <></>
-            )}
+                {loggedUser ? getInitials(loggedUser.username) : ""}
+              </Avatar>
+            </IconButton>
           </Toolbar>
         </Container>
       </AppBar>
@@ -104,6 +117,15 @@ const Header = () => {
                   <AccountCircleIcon />
                 </ListItemIcon>
                 <ListItemText primary="Profile" />
+              </ListItemButton>
+            </ListItem>
+
+            <ListItem disablePadding>
+              <ListItemButton onClick={handleLogout}>
+                <ListItemIcon>
+                  <LogoutIcon />
+                </ListItemIcon>
+                <ListItemText primary="Logout" />
               </ListItemButton>
             </ListItem>
           </List>

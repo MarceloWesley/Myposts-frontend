@@ -1,5 +1,3 @@
-"use client";
-
 import { Stack } from "@mui/material";
 
 import { ForgotPassword } from "@/components/auth/forgot-password";

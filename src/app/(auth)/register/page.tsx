@@ -1,5 +1,3 @@
-"use client";
-
 import { Stack } from "@mui/material";
 
 import { Register } from "@/components/auth/register";

@@ -20,6 +20,13 @@ const Content = ({ children }: ContentProps) => {
       <Box display="flex" flexDirection="column" flexGrow={1}>
         {children}
       </Box>
+
+      <Toolbar
+        sx={{
+          position: "relative",
+          zIndex: "1",
+        }}
+      />
     </Box>
   );
 };

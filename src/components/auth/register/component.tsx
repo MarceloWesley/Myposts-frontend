@@ -5,19 +5,11 @@ import { ErrorMessage } from "@/components/form-errors/component";
 import { useErrorHandling } from "@/hooks/error-handling";
 import { registerUsersSchema } from "@/schemas/register-user.schema";
 import { zodResolver } from "@hookform/resolvers/zod";
-import {
-  Box,
-  Paper,
-  TextField,
-  Typography,
-  useMediaQuery,
-  useTheme,
-} from "@mui/material";
+import { Box, Paper, TextField, Typography } from "@mui/material";
 import { useRouter } from "next/navigation";
 
 import { useState } from "react";
 import { SubmitHandler, useForm } from "react-hook-form";
-import { toast } from "react-toastify";
 
 type RegisterInputs = {
   username: string;
@@ -25,7 +17,7 @@ type RegisterInputs = {
   password: string;
 } & FormData;
 
-const Register = () => {
+export function Register() {
   const [loading, setLoading] = useState(false);
   const {
     register,
@@ -34,9 +26,7 @@ const Register = () => {
   } = useForm<RegisterInputs>({
     resolver: zodResolver(registerUsersSchema),
   });
-  const theme = useTheme();
   const router = useRouter();
-  const isMobile = useMediaQuery(theme.breakpoints.down("tablet"));
   const { errorValidation } = useErrorHandling();
 
   const onSubmit: SubmitHandler<RegisterInputs> = async (data) => {
@@ -115,5 +105,4 @@ const Register = () => {
       </Box>
     </Paper>
   );
-};
-export { Register };
+}

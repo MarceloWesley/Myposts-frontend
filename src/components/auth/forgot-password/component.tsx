@@ -1,3 +1,4 @@
+"use client";
 import { sendVerificationEmail } from "@/actions/user-forgot-password/action";
 import { ButtonContained } from "@/components/button/contained";
 import { useErrorHandling } from "@/hooks/error-handling";
@@ -12,13 +13,9 @@ type VerificationEmailInputs = {
   password: string;
 } & FormData;
 
-const ForgotPassword = () => {
+export function ForgotPassword() {
   const [loading, setLoading] = useState(false);
-  const {
-    register,
-    handleSubmit,
-    formState: { errors },
-  } = useForm<VerificationEmailInputs>({});
+  const { register, handleSubmit } = useForm<VerificationEmailInputs>({});
   const router = useRouter();
   const { errorValidation } = useErrorHandling();
 
@@ -85,5 +82,4 @@ const ForgotPassword = () => {
       </Box>
     </Paper>
   );
-};
-export { ForgotPassword };
+}

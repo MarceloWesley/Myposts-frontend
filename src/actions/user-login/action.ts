@@ -10,22 +10,34 @@ async function LoginUser(formData: FormData) {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
+        "Access-Control-Allow-Origin": "*",
       },
+      credentials: "same-origin",
       body: JSON.stringify(formData),
     });
 
     const data = await response.json();
 
     cookies().set({
-      name: "user-token",
+      name: "session-headers",
+      httpOnly: true,
+      value: response.headers.getSetCookie().join("; "),
+    });
+
+    cookies().set({
+      name: "r-token",
       value: data.token,
       httpOnly: true,
-      path: "/",
     });
 
     return data;
   } catch (error: any) {
-    return error.json();
+    const filteredError = {
+      code: error.code,
+      url: error.url,
+      data: error.data,
+    };
+    return filteredError;
   }
 }
 

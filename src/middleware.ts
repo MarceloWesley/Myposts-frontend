@@ -1,4 +1,4 @@
-import type { NextRequest } from "next/server";
+import { type NextRequest } from "next/server";
 
 export function middleware(request: NextRequest) {
   const currentUser = request.cookies.get("user-token")?.value;
@@ -10,7 +10,7 @@ export function middleware(request: NextRequest) {
     "/reset-password",
   ];
 
-  if (currentUser && !request.nextUrl.pathname.startsWith("/home")) {
+  if (currentUser && allowedRoutes.includes(request.nextUrl.pathname)) {
     return Response.redirect(new URL("/home", request.url));
   }
 

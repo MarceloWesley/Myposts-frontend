@@ -1,6 +1,5 @@
 import type { Metadata } from "next";
 import { AppProviders } from "./providers";
-import { Layout } from "./_layout/component";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
@@ -18,7 +17,7 @@ export default function RootLayout({
     <html lang="en">
       <body>
         <AppProviders>
-          <Layout>{children}</Layout>
+          {children}
           <ToastContainer />
         </AppProviders>
       </body>

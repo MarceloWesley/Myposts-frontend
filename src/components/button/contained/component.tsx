@@ -1,3 +1,4 @@
+"use client";
 import { ReactNode } from "react";
 import { BaseButtonContained } from "./styled";
 import { ButtonProps } from "@mui/material";

@@ -1,3 +1,4 @@
+"use client";
 import { UserResetPassword } from "@/actions/user-reset-password/action";
 import { ButtonContained } from "@/components/button/contained";
 import { useErrorHandling } from "@/hooks/error-handling";
@@ -14,13 +15,9 @@ type ResetInputs = {
   confirmPassword: string;
 } & FormData;
 
-const ResetPassword = () => {
+export function ResetPassword() {
   const [loading, setLoading] = useState(false);
-  const {
-    register,
-    handleSubmit,
-    formState: { errors },
-  } = useForm<ResetInputs>({});
+  const { register, handleSubmit } = useForm<ResetInputs>({});
   const { errorValidation } = useErrorHandling();
   const router = useRouter();
 
@@ -109,5 +106,4 @@ const ResetPassword = () => {
       </Box>
     </Paper>
   );
-};
-export { ResetPassword };
+}

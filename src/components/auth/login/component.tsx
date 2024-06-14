@@ -1,6 +1,7 @@
 "use client";
 import { LoginUser } from "@/actions/user-login/action";
 import { ButtonContained } from "@/components/button/contained";
+import { UserContext } from "@/context/session";
 import { useErrorHandling } from "@/hooks/error-handling";
 import {
   Box,
@@ -12,7 +13,7 @@ import {
 } from "@mui/material";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
-import { useState } from "react";
+import { useContext, useState } from "react";
 import { SubmitHandler, useForm } from "react-hook-form";
 
 type LoginInputs = {
@@ -20,28 +21,31 @@ type LoginInputs = {
   password: string;
 } & FormData;
 
-const Login = () => {
+export function Login() {
   const [loading, setLoading] = useState(false);
-  const {
-    register,
-    handleSubmit,
-    formState: { errors },
-  } = useForm<LoginInputs>({});
+  const { register, handleSubmit } = useForm<LoginInputs>({});
   const theme = useTheme();
   const router = useRouter();
   const { errorValidation } = useErrorHandling();
+  const { setToken } = useContext(UserContext);
 
   const onSubmit: SubmitHandler<LoginInputs> = async (data) => {
     setLoading(true);
-    const response = await LoginUser(data);
-    setLoading(false);
+    try {
+      const response = await LoginUser(data);
 
-    const statusCode = response.statusCode;
+      const statusCode = response.statusCode;
 
-    if (statusCode !== 401 && statusCode !== 404) {
-      router.push("/home");
-    } else {
-      errorValidation(response);
+      if (statusCode !== 401 && statusCode !== 404) {
+        setToken(response.token);
+        router.push("/home");
+      } else {
+        errorValidation(response);
+      }
+    } catch (error) {
+      console.log(error);
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -120,5 +124,4 @@ const Login = () => {
       </Box>
     </Paper>
   );
-};
-export { Login };
+}
