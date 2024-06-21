@@ -1,10 +1,9 @@
 "use server";
 
-import { getCookies } from "../getCookies/action";
+import { revalidateTag } from "next/cache";
 
 async function sendPost(formData: FormData) {
   const baseUrl = process.env.URL_BACKEND;
-  const token = await getCookies();
 
   try {
     const response = await fetch(`${baseUrl}/api/posts`, {
@@ -24,12 +23,9 @@ async function sendPost(formData: FormData) {
 
     return responseData;
   } catch (error: any) {
-    const filteredError = {
-      code: error.code,
-      url: error.url,
-      data: error.data,
-    };
-    return filteredError;
+    return error;
+  } finally {
+    revalidateTag("get-posts");
   }
 }
 

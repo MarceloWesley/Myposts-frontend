@@ -14,15 +14,12 @@ import { useRef, useState } from "react";
 import { Post as PostsProps } from "../posts-list/types";
 import { formatDate } from "@/helper/formatDate";
 import { getInitials } from "@/helper/getInitials";
+import { useRouter } from "next/navigation";
 
 const Post = ({ data }: { data: PostsProps }) => {
   const theme = useTheme();
-  const [expanded, setExpanded] = useState(false);
+  const router = useRouter();
   const contentRef = useRef(null);
-
-  const handleExpandClick = () => {
-    setExpanded(!expanded);
-  };
 
   return (
     <Posts.Root>
@@ -61,16 +58,21 @@ const Post = ({ data }: { data: PostsProps }) => {
         <Box>
           <Typography variant="h6">{data.title}</Typography>
         </Box>
+
         <Box>
-          <Collapse in={expanded} collapsedSize={100}>
+          <Collapse collapsedSize={100}>
             <Typography ref={contentRef} variant="body2">
               {data.content}
             </Typography>
           </Collapse>
+
           {data.content.length > 100 && (
             <Box display="flex">
-              <Button sx={{ padding: 0 }} onClick={handleExpandClick}>
-                {expanded ? "Ver menos" : "Ver mais"}
+              <Button
+                sx={{ padding: 0 }}
+                onClick={() => router.push(`/post/${data._id}`)}
+              >
+                Ver mais
               </Button>
             </Box>
           )}
@@ -78,7 +80,10 @@ const Post = ({ data }: { data: PostsProps }) => {
       </Posts.Content>
 
       <Posts.Actions>
-        <IconButton sx={{ padding: 0 }}>
+        <IconButton
+          sx={{ padding: 0 }}
+          onClick={() => router.push(`/post/${data._id}`)}
+        >
           <Chat color={theme.palette.primary.dark} size={26} />
         </IconButton>
       </Posts.Actions>

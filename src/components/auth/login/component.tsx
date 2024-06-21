@@ -32,9 +32,8 @@ export function Login() {
   const onSubmit: SubmitHandler<LoginInputs> = async (data) => {
     setLoading(true);
     try {
-      const response = await LoginUser(data);
-
-      const statusCode = response.statusCode;
+      const response: any = await LoginUser(data);
+      const statusCode = response.status;
 
       if (statusCode !== 401 && statusCode !== 404) {
         setToken(response.token);
@@ -42,8 +41,8 @@ export function Login() {
       } else {
         errorValidation(response);
       }
-    } catch (error) {
-      console.log(error);
+    } catch (error: any) {
+      errorValidation(error);
     } finally {
       setLoading(false);
     }

@@ -7,7 +7,7 @@ type User = {
 };
 
 export type Post = {
-  id: string;
+  _id: string;
   content: string;
   createdAt: string | Date;
   title: string;

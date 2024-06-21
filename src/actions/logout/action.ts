@@ -34,12 +34,7 @@ async function Logout() {
 
     return responseData;
   } catch (error: any) {
-    const filteredError = {
-      code: error.code,
-      url: error.url,
-      data: error.data,
-    };
-    return filteredError;
+    return error;
   }
 }
 

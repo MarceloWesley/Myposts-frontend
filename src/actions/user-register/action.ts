@@ -14,7 +14,7 @@ async function createUser(formData: FormData) {
 
     return response.json();
   } catch (error: any) {
-    return error.json();
+    return error;
   }
 }
 

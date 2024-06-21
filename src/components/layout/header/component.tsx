@@ -27,6 +27,7 @@ import { getInitials } from "@/helper/getInitials";
 import { UserContext } from "@/context/session";
 import { Logout } from "@/actions/logout/action";
 import { useRouter } from "next/navigation";
+import { menuItemDesktopStyle } from "./style";
 
 const Header = () => {
   const [openUserMenuMobile, setOpenUserMenuMobile] = useState(false);
@@ -139,13 +140,19 @@ const Header = () => {
         open={openUserMenuDesktop}
         onClose={handleCloseMenu}
       >
-        <MenuItem onClick={handleCloseMenu}>
-          <AccountCircleIcon fontSize="large" color="secondary" />
+        <MenuItem sx={menuItemDesktopStyle} onClick={handleCloseMenu}>
+          <AccountCircleIcon fontSize="medium" color="primary" />
           Profile
         </MenuItem>
-        <MenuItem onClick={handleCloseMenu}>
-          <AccountCircleIcon fontSize="large" color="secondary" />
-          My Account
+        <MenuItem
+          sx={menuItemDesktopStyle}
+          onClick={() => {
+            handleLogout();
+            handleCloseMenu();
+          }}
+        >
+          <LogoutIcon fontSize="medium" color="primary" />
+          Logout
         </MenuItem>
       </Menu>
     </>

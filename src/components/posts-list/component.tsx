@@ -1,28 +1,41 @@
 "use client";
-import { GetAllPosts } from "@/actions/get-All-Posts/action";
-import { useCallback, useEffect, useState } from "react";
-import { PostData } from "./types";
+import { useState } from "react";
 import { Post } from "../posts/component";
+import { PostData } from "./types";
+import { GetAllPosts } from "@/actions/get-All-Posts/action";
+import { Box } from "@mui/material";
+import { ButtonContained } from "../button/contained";
 
-function PostsList() {
-  const [posts, setPosts] = useState<PostData>();
+const initial_page_value = 1;
+function PostsList({ posts }: { posts: PostData }) {
+  const [page, setPage] = useState(initial_page_value);
+  const [lPosts, setLPosts] = useState(posts.data);
 
-  const getAllPosts = useCallback(async () => {
-    const response = await GetAllPosts();
-    if (response) {
-      setPosts(response);
+  const loadMoreUsers = async () => {
+    if ((posts.meta.pageCount as number) > page) {
+      try {
+        const apiUsers: PostData = await GetAllPosts(10, page + 1);
+
+        setLPosts((prevPosts) => [...prevPosts, ...apiUsers.data]);
+        setPage((prevPage) => prevPage + 1);
+      } catch (error) {
+        console.error("Failed to load more posts", error);
+      }
+    } else {
+      console.log("No more pages to load");
     }
-  }, []);
-
-  useEffect(() => {
-    getAllPosts();
-  }, [getAllPosts]);
+  };
 
   return (
     <>
-      {posts?.data?.map((post, index) => (
-        <Post key={post.id} data={post} />
+      {lPosts.map((post, index) => (
+        <>
+          <Post key={post._id} data={post} />
+        </>
       ))}
+      <Box display="flex" justifyContent="center">
+        <ButtonContained onClick={loadMoreUsers}>Carregar mais</ButtonContained>
+      </Box>
     </>
   );
 }

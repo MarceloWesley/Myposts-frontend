@@ -1,8 +1,7 @@
+import { ForgotPassword } from "@/components/auth/forgot-password";
 import { Stack } from "@mui/material";
 
-import { ForgotPassword } from "@/components/auth/forgot-password";
-
-export default function LoginPage() {
+export default function ForgotPasswordPage() {
   return (
     <Stack width="100%" maxWidth="500px">
       <ForgotPassword />

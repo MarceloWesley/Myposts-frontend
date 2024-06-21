@@ -3,3 +3,7 @@ type PostInputs = {
   content: string;
   id: string;
 } & FormData;
+
+type commentInputs = {
+  content: string;
+} & FormData;

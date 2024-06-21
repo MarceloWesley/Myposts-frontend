@@ -2,7 +2,7 @@
 
 import { getCookies } from "../getCookies/action";
 
-async function GetAllPosts() {
+async function GetAllPosts(size: number, page: number = 1) {
   const baseUrl = process.env.URL_BACKEND;
   const token = await getCookies();
   const select = {
@@ -13,8 +13,11 @@ async function GetAllPosts() {
 
   try {
     const response = await fetch(
-      `${baseUrl}/api/posts?select=${base64String}`,
+      `${baseUrl}/api/posts?select=${base64String}&page=${page}&size=${size}&sort={"createdAt": -1}`,
       {
+        next: {
+          tags: ["get-posts"],
+        },
         method: "GET",
         headers: {
           "Content-Type": "application/json",
@@ -22,12 +25,8 @@ async function GetAllPosts() {
           Authorization: `Bearer ${token}`,
         },
         credentials: "same-origin",
-        next: {
-          tags: ["get-post"],
-        },
       }
     );
-    console.log("fez o fetch");
     const data = await response.json();
     return data;
   } catch (error: any) {

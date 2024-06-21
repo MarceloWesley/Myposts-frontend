@@ -6,7 +6,13 @@ import Link from "next/link";
 const FooterLogin = () => {
   return (
     <>
-      <Box textAlign="center">
+      <Box
+        width="100%"
+        textAlign="center"
+        position="fixed"
+        bottom="0"
+        zIndex="9999"
+      >
         <Typography>
           Desenvolvido por{" "}
           <Link

@@ -18,6 +18,12 @@ async function LoginUser(formData: FormData) {
 
     const data = await response.json();
 
+    const responseData = {
+      status: response.status,
+      statusText: response.statusText,
+      token: data.token,
+    };
+
     cookies().set({
       name: "session-headers",
       httpOnly: true,
@@ -25,19 +31,14 @@ async function LoginUser(formData: FormData) {
     });
 
     cookies().set({
-      name: "r-token",
+      name: "user-token",
       value: data.token,
       httpOnly: true,
     });
 
-    return data;
+    return responseData;
   } catch (error: any) {
-    const filteredError = {
-      code: error.code,
-      url: error.url,
-      data: error.data,
-    };
-    return filteredError;
+    return error;
   }
 }
 
