@@ -17,7 +17,6 @@ async function LoginUser(formData: FormData) {
     });
 
     const data = await response.json();
-
     const responseData = {
       status: response.status,
       statusText: response.statusText,

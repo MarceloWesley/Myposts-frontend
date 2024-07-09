@@ -8,15 +8,17 @@ import HomeIcon from "@mui/icons-material/Home";
 import AddIcon from "@mui/icons-material/Add";
 import PersonIcon from "@mui/icons-material/Person";
 import { usePathname, useRouter } from "next/navigation";
-import { useCallback, useState } from "react";
+import { useCallback, useContext, useState } from "react";
 import { CreatePostMobile } from "../create-post-mobile/component";
 import { CreateCommentMobile } from "../create-comment-mobile";
 import ChatBubbleIcon from "@mui/icons-material/ChatBubble";
+import { UserContext } from "@/context/session";
 
 const MobileNavigation = () => {
   const router = useRouter();
   const [postModal, setPostModal] = useState(false);
   const [commentModal, setCommentModal] = useState(false);
+  const { loggedUser } = useContext<any>(UserContext);
   const pathname = usePathname();
   const theme = useTheme();
   const isPostPage = pathname.includes("/post");
@@ -58,7 +60,7 @@ const MobileNavigation = () => {
 
         <BottomNavigationAction
           label="Profile"
-          onClick={() => router.refresh()}
+          onClick={() => router.push(`/profile/${loggedUser.id}`)}
           value="profile"
           icon={<PersonIcon />}
         />

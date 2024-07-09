@@ -1,34 +1,26 @@
 "use client";
-import { GetPostById } from "@/actions/get-post-by-id/action";
 import { Posts } from "@/components/posts";
 import { Avatar, Box, Typography, useTheme } from "@mui/material";
 import { Post } from "../posts-list/types";
-import { useCallback, useEffect, useState } from "react";
+import { useEffect } from "react";
 import { getInitials } from "@/helper/getInitials";
 import { formatDate } from "@/helper/formatDate";
 import { Loading } from "../loading";
 import { usePostIdStore } from "@/stores/post-id-store/postIdStore";
 
 export default function PostInfo({ post }: { post: Post }) {
-  // const [post, setPost] = useState<Post>();
   const theme = useTheme();
   const items = usePostIdStore((state) => state.addId);
-  items(post._id);
+  const isValidPost =
+    post.statusCode !== 401 && post.statusCode !== 500 && post !== null;
 
-  // const getPost = useCallback(async () => {
-  //   const response = await GetPostById(id.id);
-  //   if (response) {
-  //     setPost(response);
-  //   }
-  // }, [id.id]);
-
-  // useEffect(() => {
-  //   getPost();
-  // }, [getPost]);
+  useEffect(() => {
+    items(post._id);
+  }, [post]);
 
   return (
     <>
-      {post ? (
+      {isValidPost ? (
         <Posts.Root>
           <Posts.Header>
             <Box display="flex" gap={1} alignItems="center">

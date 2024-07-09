@@ -1,10 +1,12 @@
-type User = {
+import { ResponseData } from "@/hooks/error-handling";
+
+export type User = {
   createdAt: string | Date;
   updatedAt: string | Date;
   email: string;
   username: string;
   id: string;
-};
+} & ResponseData;
 
 export type Post = {
   _id: string;
@@ -13,9 +15,9 @@ export type Post = {
   title: string;
   updatedAt: string | Date;
   user: User;
-};
+} & ResponseData;
 
-type MetaData = {
+export type MetaData = {
   hasNext: boolean;
   hasPrevious: boolean;
   pageCount: number | null;
@@ -25,4 +27,4 @@ type MetaData = {
 export type PostData = {
   data: Post[];
   meta: MetaData;
-};
+} & ResponseData;

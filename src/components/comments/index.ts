@@ -3,11 +3,11 @@ import { CommentRoot } from "./root";
 import { CommentContent } from "./content";
 import { CommentActions } from "./actions";
 
-const Posts = {
+const Comments = {
   Root: CommentRoot,
   Header: CommentHeader,
   Content: CommentContent,
   Actions: CommentActions,
 };
 
-export { Posts };
+export { Comments };

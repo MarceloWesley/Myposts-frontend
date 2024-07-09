@@ -10,7 +10,7 @@ import {
 } from "@mui/material";
 import { Posts } from ".";
 import { Chat } from "@phosphor-icons/react";
-import { useRef, useState } from "react";
+import { useRef } from "react";
 import { Post as PostsProps } from "../posts-list/types";
 import { formatDate } from "@/helper/formatDate";
 import { getInitials } from "@/helper/getInitials";
@@ -70,7 +70,7 @@ const Post = ({ data }: { data: PostsProps }) => {
             <Box display="flex">
               <Button
                 sx={{ padding: 0 }}
-                onClick={() => router.push(`/post/${data._id}`)}
+                onClick={() => router.push(`/post/${data._id}/comments`)}
               >
                 Ver mais
               </Button>
@@ -82,7 +82,7 @@ const Post = ({ data }: { data: PostsProps }) => {
       <Posts.Actions>
         <IconButton
           sx={{ padding: 0 }}
-          onClick={() => router.push(`/post/${data._id}`)}
+          onClick={() => router.push(`/post/${data._id}/comments`)}
         >
           <Chat color={theme.palette.primary.dark} size={26} />
         </IconButton>

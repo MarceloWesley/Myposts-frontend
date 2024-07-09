@@ -1,3 +1,5 @@
+import { ResponseData } from "@/hooks/error-handling";
+
 export type CommentProps = {
   _id: string;
   content: string;
@@ -17,4 +19,4 @@ type MetaData = {
 export type CommentData = {
   data: CommentProps[];
   meta: MetaData;
-};
+} & ResponseData;

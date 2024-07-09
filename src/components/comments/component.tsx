@@ -7,7 +7,7 @@ import {
   Typography,
   useTheme,
 } from "@mui/material";
-import { Posts } from ".";
+import { Comments } from ".";
 import { useRef, useState } from "react";
 import { formatDate } from "@/helper/formatDate";
 import { useRouter } from "next/navigation";
@@ -20,8 +20,8 @@ const Comment = ({ data }: { data: CommentProps }) => {
   const contentRef = useRef(null);
 
   return (
-    <Posts.Root>
-      <Posts.Header>
+    <Comments.Root>
+      <Comments.Header>
         <Box display="flex" gap={1} alignItems="center">
           <Box
             sx={{
@@ -43,9 +43,9 @@ const Comment = ({ data }: { data: CommentProps }) => {
           <Typography variant="caption">Marcelo</Typography>
         </Box>
         <Typography variant="caption">{formatDate(data.createdAt)}</Typography>
-      </Posts.Header>
+      </Comments.Header>
 
-      <Posts.Content
+      <Comments.Content
         sx={{
           ".MuiCollapse-root": {
             height: `${data.content.length > 100 ? "100px" : "auto"}`,
@@ -73,8 +73,8 @@ const Comment = ({ data }: { data: CommentProps }) => {
             </Box>
           )}
         </Box>
-      </Posts.Content>
-    </Posts.Root>
+      </Comments.Content>
+    </Comments.Root>
   );
 };
 

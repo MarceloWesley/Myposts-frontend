@@ -28,10 +28,12 @@ import { UserContext } from "@/context/session";
 import { Logout } from "@/actions/logout/action";
 import { useRouter } from "next/navigation";
 import { menuItemDesktopStyle } from "./style";
+import { useErrorHandling } from "@/hooks/error-handling";
 
 const Header = () => {
   const [openUserMenuMobile, setOpenUserMenuMobile] = useState(false);
   const [openUserMenuDesktop, setOpenUserMenuDesktop] = useState(false);
+  const { errorValidation } = useErrorHandling();
   const anchorRef = useRef<HTMLButtonElement>(null);
   const { loggedUser } = useContext(UserContext);
   const router = useRouter();
@@ -52,9 +54,20 @@ const Header = () => {
     setOpenUserMenuDesktop(false);
   }, []);
 
+  const handleClickInProfile = () => {
+    handleCloseMenu();
+    router.push(`/profile/${loggedUser?.id}`);
+  };
+
   const handleLogout = async () => {
-    const response: any = await Logout();
-    if (response.status === 200) {
+    try {
+      const response: any = await Logout();
+      if (response.status !== 200) {
+        errorValidation(response);
+      }
+    } catch (error: any) {
+      errorValidation(error);
+    } finally {
       router.push("/login");
     }
   };
@@ -113,17 +126,13 @@ const Header = () => {
         <Box sx={{ width: 250 }} role="presentation" onClick={handleCloseMenu}>
           <List>
             <ListItem disablePadding>
-              <ListItemButton>
-                <ListItemIcon>
-                  <AccountCircleIcon />
-                </ListItemIcon>
-                <ListItemText primary="Profile" />
-              </ListItemButton>
-            </ListItem>
-
-            <ListItem disablePadding>
               <ListItemButton onClick={handleLogout}>
-                <ListItemIcon>
+                <ListItemIcon
+                  sx={{
+                    minWidth: "30px",
+                    color: theme.palette.error.main,
+                  }}
+                >
                   <LogoutIcon />
                 </ListItemIcon>
                 <ListItemText primary="Logout" />
@@ -140,7 +149,7 @@ const Header = () => {
         open={openUserMenuDesktop}
         onClose={handleCloseMenu}
       >
-        <MenuItem sx={menuItemDesktopStyle} onClick={handleCloseMenu}>
+        <MenuItem sx={menuItemDesktopStyle} onClick={handleClickInProfile}>
           <AccountCircleIcon fontSize="medium" color="primary" />
           Profile
         </MenuItem>
@@ -151,7 +160,7 @@ const Header = () => {
             handleCloseMenu();
           }}
         >
-          <LogoutIcon fontSize="medium" color="primary" />
+          <LogoutIcon fontSize="medium" color="error" />
           Logout
         </MenuItem>
       </Menu>
