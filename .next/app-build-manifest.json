@@ -44,17 +44,6 @@
       "static/chunks/main-app.js",
       "static/chunks/app/(website)/post/[id]/comments/error.js"
     ],
-    "/(website)/profile/[id]/page": [
-      "static/chunks/webpack.js",
-      "static/chunks/main-app.js",
-      "static/css/app/(website)/profile/[id]/page.css",
-      "static/chunks/app/(website)/profile/[id]/page.js"
-    ],
-    "/(website)/profile/[id]/error": [
-      "static/chunks/webpack.js",
-      "static/chunks/main-app.js",
-      "static/chunks/app/(website)/profile/[id]/error.js"
-    ],
     "/_not-found/page": [
       "static/chunks/webpack.js",
       "static/chunks/main-app.js",

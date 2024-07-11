@@ -2,7 +2,12 @@
 
 import { getCookies } from "../getCookies/action";
 
-async function GetAllPosts(size: number, page: number = 1) {
+type GetAllPostsProps = {
+  size: number;
+  page?: number;
+};
+
+async function GetAllPosts({ size, page = 1 }: GetAllPostsProps) {
   const baseUrl = process.env.URL_BACKEND;
   const token = await getCookies();
   const select = {
