@@ -44,10 +44,22 @@
       "static/chunks/main-app.js",
       "static/chunks/app/(website)/post/[id]/comments/error.js"
     ],
-    "/_not-found/page": [
+    "/(website)/profile/[id]/page": [
       "static/chunks/webpack.js",
       "static/chunks/main-app.js",
-      "static/chunks/app/_not-found/page.js"
+      "static/css/app/(website)/profile/[id]/page.css",
+      "static/chunks/app/(website)/profile/[id]/page.js"
+    ],
+    "/(website)/profile/[id]/error": [
+      "static/chunks/webpack.js",
+      "static/chunks/main-app.js",
+      "static/chunks/app/(website)/profile/[id]/error.js"
+    ],
+    "/(auth)/register/page": [
+      "static/chunks/webpack.js",
+      "static/chunks/main-app.js",
+      "static/css/app/(auth)/register/page.css",
+      "static/chunks/app/(auth)/register/page.js"
     ]
   }
 }

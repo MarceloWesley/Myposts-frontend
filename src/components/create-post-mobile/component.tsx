@@ -19,6 +19,7 @@ import { useContext, useState } from "react";
 import { UserContext } from "@/context/session";
 import { ResponseData, useErrorHandling } from "@/hooks/error-handling";
 import { sendPost } from "@/actions/sendPost/action";
+import { GetAllPosts } from "@/actions/get-All-Posts/action";
 
 type ModalProps = {
   open: boolean;

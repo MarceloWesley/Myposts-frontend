@@ -1,106 +1,90 @@
 "use client";
-import {
-  ComponentType,
-  ReactNode,
-  useCallback,
-  useEffect,
-  useState,
-} from "react";
+import { ComponentType, useCallback, useEffect, useState } from "react";
 import { MetaData } from "../posts-list/types";
 import { Box, Typography } from "@mui/material";
 import { useInView } from "react-intersection-observer";
 import { produce } from "immer";
+import { useErrorHandling } from "@/hooks/error-handling";
+import { GetProps } from "@/actions/types";
 
 type DataProps = {
   meta: MetaData;
-  data: any;
+  data: unknown[];
 };
 
 type InfiniteScrollProps = {
-  onLoadMore: ({
-    size,
-    page,
-  }: {
-    size: number;
-    page?: number;
-  }) => Promise<DataProps>;
+  onLoadMore: ({ size, page, id }: GetProps) => Promise<DataProps>;
   pageSize: number;
   id?: number;
   Element: ComponentType<any>;
-  initialData: DataProps;
 };
 
 const INITIAL_PAGE_VALUE = 1;
+const defaultInitialData: DataProps = {
+  meta: { hasNext: false, hasPrevious: false, pageCount: 0, total: 0 },
+  data: [],
+};
 
 function InfiniteScroll({
   onLoadMore,
   pageSize,
   Element,
   id,
-  initialData,
 }: InfiniteScrollProps) {
-  const [lists, setLists] = useState(initialData);
+  const [list, setList] = useState<DataProps>(defaultInitialData);
   const [page, setPage] = useState(INITIAL_PAGE_VALUE);
   const { ref, inView } = useInView();
+  const { errorValidation } = useErrorHandling();
 
-  const loadMore = async () => {
-    if (lists.meta.hasNext) {
-      try {
-        const newData: DataProps = await onLoadMore({
-          size: pageSize,
-          page: page + 1,
-        });
-        console.log("new data", newData);
-        setLists(
-          produce(lists, (draft) => {
-            draft.data.push(...newData.data);
-            draft.meta = newData.meta;
-          })
-        );
-        setPage((prevPage) => prevPage + 1);
-      } catch (error) {
-        console.log(error);
-      }
-    }
-  };
+  const loadMore = useCallback(async () => {
+    try {
+      const newData: DataProps = await onLoadMore({
+        size: pageSize,
+        page: page,
+      });
 
-  const updateList = useCallback(() => {
-    const existingIds = new Set(lists.data.map((item: any) => item._id));
-    const newData = initialData.data.filter(
-      (item: any) => !existingIds.has(item._id)
-    );
-
-    if (newData.length > 0) {
-      setLists(
-        produce(lists, (draft) => {
-          if (!draft.meta.hasNext) {
-            draft.data = [...newData, ...draft.data];
-          } else {
-            draft.data = [...newData, ...draft.data.slice(0, -1)];
-          }
+      setList(
+        produce(list, (draft) => {
+          draft.data.push(...newData.data);
+          draft.meta = newData.meta;
         })
       );
+      setPage((prevPage) => prevPage + 1);
+    } catch (error: any) {
+      errorValidation(error);
     }
-  }, [initialData.data]);
+  }, [inView]);
+
+  const loadInitialData = useCallback(async () => {
+    try {
+      const newData: DataProps = await onLoadMore({ size: pageSize, page: 1 });
+      setList(
+        produce(list, (draft) => {
+          draft.data.push(...newData.data);
+          draft.meta = newData.meta;
+        })
+      );
+    } catch (error: any) {
+      console.log(error);
+    }
+  }, []);
 
   useEffect(() => {
-    updateList();
-  }, [updateList]);
-
-  console.log("lists", lists);
+    loadInitialData();
+  }, []);
 
   useEffect(() => {
     if (inView) {
       loadMore();
     }
-  }, [inView]);
+  }, [loadMore]);
 
   return (
     <>
-      {lists.data.map((list: any) => (
-        <Element key={list._id} data={list} />
+      {list.data.map((value: any) => (
+        <Element key={value._id} data={value} />
       ))}
-      {lists?.meta.hasNext && (
+      {list?.meta.hasNext && (
         <Box ref={ref} display="flex" justifyContent="center">
           <Typography>Loading..</Typography>
         </Box>
