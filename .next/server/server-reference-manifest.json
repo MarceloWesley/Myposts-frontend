@@ -11,17 +11,19 @@
     "92848a4cf0d14afd1f9c075f54dccdc69df12813": {
       "workers": {
         "app/(auth)/login/page": "(action-browser)/./node_modules/next/dist/build/webpack/loaders/next-flight-action-entry-loader.js?actions=%5B%5B%22%2Fhome%2Fmarcelo%2Fprojects%2Fmyposts-frontend%2Fsrc%2Factions%2Fuser-login%2Faction.ts%22%2C%5B%22LoginUser%22%5D%5D%2C%5B%22%2Fhome%2Fmarcelo%2Fprojects%2Fmyposts-frontend%2Fsrc%2Factions%2FgetCookies%2Faction.ts%22%2C%5B%22getCookies%22%5D%5D%5D&__client_imported__=true!",
-        "app/_not-found/page": "(action-browser)/./node_modules/next/dist/build/webpack/loaders/next-flight-action-entry-loader.js?actions=%5B%5B%22%2Fhome%2Fmarcelo%2Fprojects%2Fmyposts-frontend%2Fsrc%2Factions%2FgetCookies%2Faction.ts%22%2C%5B%22getCookies%22%5D%5D%5D&__client_imported__=true!",
         "app/(website)/home/page": "(rsc)/./node_modules/next/dist/build/webpack/loaders/next-flight-action-entry-loader.js?actions=%5B%5B%22%2Fhome%2Fmarcelo%2Fprojects%2Fmyposts-frontend%2Fsrc%2Factions%2Fget-All-Posts%2Faction.ts%22%2C%5B%22GetAllPosts%22%5D%5D%2C%5B%22%2Fhome%2Fmarcelo%2Fprojects%2Fmyposts-frontend%2Fsrc%2Factions%2FgetCookies%2Faction.ts%22%2C%5B%22getCookies%22%5D%5D%5D&__client_imported__=!",
+        "app/_not-found/page": "(action-browser)/./node_modules/next/dist/build/webpack/loaders/next-flight-action-entry-loader.js?actions=%5B%5B%22%2Fhome%2Fmarcelo%2Fprojects%2Fmyposts-frontend%2Fsrc%2Factions%2FgetCookies%2Faction.ts%22%2C%5B%22getCookies%22%5D%5D%5D&__client_imported__=true!",
         "app/(website)/post/[id]/comments/page": "(rsc)/./node_modules/next/dist/build/webpack/loaders/next-flight-action-entry-loader.js?actions=%5B%5B%22%2Fhome%2Fmarcelo%2Fprojects%2Fmyposts-frontend%2Fsrc%2Factions%2Fget-all-post-comments%2Faction.ts%22%2C%5B%22GetAllCommentsByPost%22%5D%5D%2C%5B%22%2Fhome%2Fmarcelo%2Fprojects%2Fmyposts-frontend%2Fsrc%2Factions%2FgetCookies%2Faction.ts%22%2C%5B%22getCookies%22%5D%5D%2C%5B%22%2Fhome%2Fmarcelo%2Fprojects%2Fmyposts-frontend%2Fsrc%2Factions%2Fget-post-by-id%2Faction.ts%22%2C%5B%22GetPostById%22%5D%5D%5D&__client_imported__=!",
-        "app/(website)/profile/[id]/page": "(rsc)/./node_modules/next/dist/build/webpack/loaders/next-flight-action-entry-loader.js?actions=%5B%5B%22%2Fhome%2Fmarcelo%2Fprojects%2Fmyposts-frontend%2Fsrc%2Factions%2Ffind-comment-by-user%2Faction.ts%22%2C%5B%22GetAllCommentsByUserId%22%5D%5D%2C%5B%22%2Fhome%2Fmarcelo%2Fprojects%2Fmyposts-frontend%2Fsrc%2Factions%2FgetCookies%2Faction.ts%22%2C%5B%22getCookies%22%5D%5D%2C%5B%22%2Fhome%2Fmarcelo%2Fprojects%2Fmyposts-frontend%2Fsrc%2Factions%2Ffind-post-by-user%2Faction.ts%22%2C%5B%22GetAllPostsByUserId%22%5D%5D%2C%5B%22%2Fhome%2Fmarcelo%2Fprojects%2Fmyposts-frontend%2Fsrc%2Factions%2Ffind-user-by-id%2Faction.ts%22%2C%5B%22GetUserById%22%5D%5D%2C%5B%22%2Fhome%2Fmarcelo%2Fprojects%2Fmyposts-frontend%2Fsrc%2Factions%2Ffind-user-stats%2Faction.ts%22%2C%5B%22FindUserStats%22%5D%5D%5D&__client_imported__=!"
+        "app/(website)/profile/[id]/page": "(rsc)/./node_modules/next/dist/build/webpack/loaders/next-flight-action-entry-loader.js?actions=%5B%5B%22%2Fhome%2Fmarcelo%2Fprojects%2Fmyposts-frontend%2Fsrc%2Factions%2Ffind-comment-by-user%2Faction.ts%22%2C%5B%22GetAllCommentsByUserId%22%5D%5D%2C%5B%22%2Fhome%2Fmarcelo%2Fprojects%2Fmyposts-frontend%2Fsrc%2Factions%2FgetCookies%2Faction.ts%22%2C%5B%22getCookies%22%5D%5D%2C%5B%22%2Fhome%2Fmarcelo%2Fprojects%2Fmyposts-frontend%2Fsrc%2Factions%2Ffind-post-by-user%2Faction.ts%22%2C%5B%22GetAllPostsByUserId%22%5D%5D%2C%5B%22%2Fhome%2Fmarcelo%2Fprojects%2Fmyposts-frontend%2Fsrc%2Factions%2Ffind-user-by-id%2Faction.ts%22%2C%5B%22GetUserById%22%5D%5D%2C%5B%22%2Fhome%2Fmarcelo%2Fprojects%2Fmyposts-frontend%2Fsrc%2Factions%2Ffind-user-stats%2Faction.ts%22%2C%5B%22FindUserStats%22%5D%5D%5D&__client_imported__=!",
+        "app/(auth)/register/page": "(action-browser)/./node_modules/next/dist/build/webpack/loaders/next-flight-action-entry-loader.js?actions=%5B%5B%22%2Fhome%2Fmarcelo%2Fprojects%2Fmyposts-frontend%2Fsrc%2Factions%2Fuser-register%2Faction.ts%22%2C%5B%22createUser%22%5D%5D%2C%5B%22%2Fhome%2Fmarcelo%2Fprojects%2Fmyposts-frontend%2Fsrc%2Factions%2FgetCookies%2Faction.ts%22%2C%5B%22getCookies%22%5D%5D%5D&__client_imported__=true!"
       },
       "layer": {
         "app/(auth)/login/page": "action-browser",
-        "app/_not-found/page": "action-browser",
         "app/(website)/home/page": "rsc",
+        "app/_not-found/page": "action-browser",
         "app/(website)/post/[id]/comments/page": "rsc",
-        "app/(website)/profile/[id]/page": "rsc"
+        "app/(website)/profile/[id]/page": "rsc",
+        "app/(auth)/register/page": "action-browser"
       }
     },
     "14d12d0414af57b079c760653a39d47c3f6c2515": {
@@ -115,8 +117,16 @@
       "layer": {
         "app/(website)/profile/[id]/page": "rsc"
       }
+    },
+    "57a25ed2bcfd2381aefb0413529775ad381a8a40": {
+      "workers": {
+        "app/(auth)/register/page": "(action-browser)/./node_modules/next/dist/build/webpack/loaders/next-flight-action-entry-loader.js?actions=%5B%5B%22%2Fhome%2Fmarcelo%2Fprojects%2Fmyposts-frontend%2Fsrc%2Factions%2Fuser-register%2Faction.ts%22%2C%5B%22createUser%22%5D%5D%2C%5B%22%2Fhome%2Fmarcelo%2Fprojects%2Fmyposts-frontend%2Fsrc%2Factions%2FgetCookies%2Faction.ts%22%2C%5B%22getCookies%22%5D%5D%5D&__client_imported__=true!"
+      },
+      "layer": {
+        "app/(auth)/register/page": "action-browser"
+      }
     }
   },
   "edge": {},
-  "encryptionKey": "MJTMELAh1v4/6Zxs49wmn9jJHo4FL0UDkeuvYsCmfcg="
+  "encryptionKey": "B/BFvuA7yvafzAMvgGERnCt4r248i8oR5pz2TOhHvnk="
 }

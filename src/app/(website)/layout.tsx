@@ -23,7 +23,6 @@ export default async function HomeLayout({
           display="flex"
           flexDirection="column"
           justifyContent="flex-start"
-          flexGrow={1}
           p={4}
         >
           {children}

@@ -4,7 +4,7 @@ import { GetUserById } from "@/actions/find-user-by-id/action";
 import { FindUserStats } from "@/actions/find-user-stats/action";
 import { CommentData } from "@/components/comments-list/types";
 import { PostData, User } from "@/components/posts-list/types";
-import { UserActivity } from "@/components/user-post-and-comments-list/component";
+import { UserActivity } from "@/components/user-activity/component";
 import { UserProfileStats } from "@/components/user-profile-stats";
 import { Stack } from "@mui/material";
 

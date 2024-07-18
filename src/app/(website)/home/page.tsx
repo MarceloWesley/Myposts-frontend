@@ -17,7 +17,7 @@ export default async function HomePage() {
       gap={4}
     >
       <CreatePostDesktop />
-      <PostsList posts={posts} onLoadMore={GetAllPosts} />
+      <PostsList onLoadMore={GetAllPosts} posts={posts} />
     </Stack>
   );
 }

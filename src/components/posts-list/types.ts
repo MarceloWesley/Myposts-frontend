@@ -21,6 +21,7 @@ export type MetaData = {
   hasNext: boolean;
   hasPrevious: boolean;
   pageCount: number | null;
+  page?: number;
   total: number;
 };
 
